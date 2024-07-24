@@ -3,16 +3,15 @@ class ProductModel {
   final String name;
   final String description;
   final int price;
-  late final int clickCount;
+  final int clickCount;
 
-  ProductModel(
-      {
-        required this.id,
-        required this.name,
-        required this.description,
-        required this.price,
-        this.clickCount = 0,
-      });
+  ProductModel({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    this.clickCount = 0,
+  });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
@@ -20,7 +19,17 @@ class ProductModel {
       name: json['name'],
       description: json['description'],
       price: json['price'],
+      clickCount: json['clickCount'] ?? 0,
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'description': description,
+      'price': price,
+      'clickCount': clickCount,
+    };
+  }
 }
