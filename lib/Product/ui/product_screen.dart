@@ -31,6 +31,11 @@ class _ProductScreenState extends State<ProductScreen> {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+        },
+      ),
     );
   }
 }
