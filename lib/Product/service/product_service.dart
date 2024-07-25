@@ -4,6 +4,7 @@ import 'package:buy_smart_admin/shared/api_end_points.dart';
 import 'package:http/http.dart' as http;
 
 class ProductService {
+
   Future<ProductModel> addProduct(ProductModel product) async {
     final response = await http.post(
       Uri.parse(ApiEndpoints.product),
@@ -18,6 +19,27 @@ class ProductService {
       return ProductModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to add product');
+    }
+  }
+
+  Future<List<ProductModel>> fetchProducts() async {
+    final response = await http.get(
+      Uri.parse(ApiEndpoints.product),
+      headers: {
+        'Authorization': 'Bearer ${ApiEndpoints.authToken}',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      try {
+        final List<dynamic> data = json.decode(response.body);
+        return data.map((json) => ProductModel.fromJson(json)).toList();
+      } catch (e) {
+        throw Exception('Failed to load products');
+      }
+    } else {
+      throw Exception('Failed to load products');
     }
   }
 }
