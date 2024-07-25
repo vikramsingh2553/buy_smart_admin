@@ -1,3 +1,4 @@
+import 'package:buy_smart_admin/Product/ui/add_products_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -33,8 +34,11 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return AddProductsScreen();
+          },));
         },
+        child: Icon(Icons.add),
       ),
     );
   }
