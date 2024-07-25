@@ -1,3 +1,4 @@
+import 'package:buy_smart_admin/Product/ui/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class AddProductsScreen extends StatefulWidget {
@@ -90,6 +91,10 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                   if (_formKey.currentState?.validate() ?? false) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Product added successfully')),
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProductScreen()),
                     );
                   }
                 },
