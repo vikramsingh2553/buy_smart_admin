@@ -44,4 +44,5 @@ class ProductProvider with ChangeNotifier {
       throw Exception('Failed to add product');
     }
   }
+
 }

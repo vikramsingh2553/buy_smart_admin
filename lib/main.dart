@@ -1,5 +1,6 @@
 
 
+import 'package:buy_smart_admin/Category/provider/category_provider.dart';
 import 'package:buy_smart_admin/Product/provider/product_provider.dart';
 import 'package:buy_smart_admin/Product/ui/starting_home_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ProductProvider(),)
+        ChangeNotifierProvider(create: (context) => ProductProvider(),),
+        ChangeNotifierProvider(create: (context) => CategoryProvider(),)
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

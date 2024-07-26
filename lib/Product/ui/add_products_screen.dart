@@ -1,8 +1,8 @@
+import 'package:buy_smart_admin/Product/model/product_model.dart';
+import 'package:buy_smart_admin/Product/provider/product_provider.dart';
 import 'package:buy_smart_admin/Product/ui/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:buy_smart_admin/Product/model/product_model.dart';
-import 'package:buy_smart_admin/Product/provider/product_provider.dart';
 
 class AddProductsScreen extends StatefulWidget {
   const AddProductsScreen({super.key});
@@ -13,11 +13,10 @@ class AddProductsScreen extends StatefulWidget {
 
 class _AddProductsScreenState extends State<AddProductsScreen> {
   final _formKey = GlobalKey<FormState>();
-  String? _selectedCategory;
-  final List<String> _categories = ['Electronics', 'Fashion', 'Home', 'Beauty', 'Sports'];
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +30,18 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
           key: _formKey,
           child: Column(
             children: [
-              DropdownButtonFormField<String>(
+              TextFormField(
+                controller: _categoryController,
                 decoration: const InputDecoration(
                   labelText: 'Category',
                   border: OutlineInputBorder(),
                 ),
-                value: _selectedCategory,
-                onChanged: (newValue) {
-                  setState(() {
-                    _selectedCategory = newValue;
-                  });
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a category';
+                  }
+                  return null;
                 },
-                items: _categories.map((category) {
-                  return DropdownMenuItem(
-                    value: category,
-                    child: Text(category),
-                  );
-                }).toList(),
-                validator: (value) => value == null ? 'Please select a category' : null,
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -103,6 +96,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                       name: _nameController.text,
                       description: _descriptionController.text,
                       price: int.parse(_priceController.text),
+                      category: _categoryController.text,
                     );
                     await Provider.of<ProductProvider>(context, listen: false).addProduct(product);
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -110,7 +104,10 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                     );
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => ProductScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(
+                        ),
+                      ),
                     );
                   }
                 },

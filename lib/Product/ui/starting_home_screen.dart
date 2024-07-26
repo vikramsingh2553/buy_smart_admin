@@ -1,4 +1,5 @@
 
+import 'package:buy_smart_admin/Category/ui/category_screen.dart';
 import 'package:buy_smart_admin/Product/ui/product_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class StartingHomeScreen extends StatefulWidget {
 }
 class _StartingHomeScreenState extends State<StartingHomeScreen> {
   final List<Widget> screens = [
-     ProductScreen(),
+    CategoryScreen(),
      Container(),
 
   ];
