@@ -1,5 +1,7 @@
 
-import 'package:buy_smart_admin/Category/ui/category_screen.dart';
+import 'package:buy_smart_admin/Product/ui/account_screen.dart';
+import 'package:buy_smart_admin/Product/ui/product_screen.dart';
+import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 
 class StartingHomeScreen extends StatefulWidget {
@@ -9,9 +11,8 @@ class StartingHomeScreen extends StatefulWidget {
 }
 class _StartingHomeScreenState extends State<StartingHomeScreen> {
   final List<Widget> screens = [
-    CategoryScreen(),
-     Container(),
-
+     const ProductScreen(),
+     const AccountScreen(),
   ];
   int currentTab = 0;
 
@@ -34,11 +35,11 @@ class _StartingHomeScreenState extends State<StartingHomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: StringConst.homeLabel,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Account',
+            label: StringConst.accountLabel,
           ),
         ],
       ),
