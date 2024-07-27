@@ -1,6 +1,7 @@
 import 'package:buy_smart_admin/Product/model/product_model.dart';
 import 'package:buy_smart_admin/Product/provider/product_provider.dart';
 import 'package:buy_smart_admin/Product/ui/product_screen.dart';
+import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Product'),
+        title: const Text(StringConst.addProductHeader),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -33,12 +34,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               TextFormField(
                 controller: _categoryController,
                 decoration: const InputDecoration(
-                  labelText: 'Category',
+                  labelText: StringConst.categoryLabel,
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a category';
+                    return StringConst.categoryValidator;
                   }
                   return null;
                 },
@@ -47,12 +48,12 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
-                  labelText: 'Product Name',
+                  labelText:  StringConst.productNameLabel,
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter the product name';
+                    return StringConst.productNameValidator;
                   }
                   return null;
                 },
@@ -61,13 +62,13 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               TextFormField(
                 controller: _priceController,
                 decoration: const InputDecoration(
-                  labelText: 'Price',
+                  labelText: StringConst.priceLabel,
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter the price';
+                    return StringConst.priceValidator;
                   }
                   return null;
                 },
@@ -76,13 +77,13 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
               TextFormField(
                 controller: _descriptionController,
                 decoration: const InputDecoration(
-                  labelText: 'Description',
+                  labelText: StringConst.descriptionLabel,
                   border: OutlineInputBorder(),
                 ),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter the product description';
+                    return StringConst.descriptionValidator;
                   }
                   return null;
                 },
@@ -100,18 +101,18 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                     );
                     await Provider.of<ProductProvider>(context, listen: false).addProduct(product);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Product added successfully')),
+                      const SnackBar(content: Text(StringConst.productAddedSuccess)),
                     );
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(
+                        builder: (context) => const ProductScreen(
                         ),
                       ),
                     );
                   }
                 },
-                child: const Text('Add Product'),
+                child: const Text(StringConst.addProductButton),
               ),
             ],
           ),
