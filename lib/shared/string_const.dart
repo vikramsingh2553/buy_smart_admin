@@ -26,5 +26,7 @@ class StringConst {
   static const String deleteProductDialog = 'Are you sure you want to delete this product?';
   static const String cancel = 'Cancel';
   static const String delete = 'Delete';
+  static const String homeLabel = 'Home';
+  static const String accountLabel = 'Account';
 }
 
