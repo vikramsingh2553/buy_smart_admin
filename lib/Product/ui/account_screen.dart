@@ -15,7 +15,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account Settings'),
+        title: const Text(StringConst.accountHeader),
       ),
       body: SingleChildScrollView(
         child: Padding(
