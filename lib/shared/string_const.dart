@@ -19,5 +19,12 @@ class StringConst {
   static const String settingGeneral = 'General Settings';
   static const String settingAbout = 'About';
   static const String settingLogOut = 'Log Out';
+  static const String productsHeader = 'Products';
+  static const String productDeletedSuccess = 'Product deleted successfully';
+  static const String productDeletedFail = 'Failed to delete product';
+  static const String deleteProductTitle = 'Delete Product';
+  static const String deleteProductDialog = 'Are you sure you want to delete this product?';
+  static const String cancel = 'Cancel';
+  static const String delete = 'Delete';
 }
 

@@ -1,3 +1,4 @@
+import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:buy_smart_admin/Product/provider/product_provider.dart';
@@ -27,11 +28,11 @@ class _ProductScreenState extends State<ProductScreen> {
     try {
       await Provider.of<ProductProvider>(context, listen: false).deleteProduct(productId);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Product deleted successfully')),
+        const SnackBar(content: Text(StringConst.productDeletedSuccess)),
       );
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to delete product')),
+        const SnackBar(content: Text(StringConst.productDeletedFail)),
       );
     }
   }
@@ -41,7 +42,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: const Text(StringConst.productsHeader),
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -99,19 +100,19 @@ class _ProductScreenState extends State<ProductScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Delete Product'),
-          content: const Text('Are you sure you want to delete this product?'),
+          title: const Text(StringConst.deleteProductTitle),
+          content: const Text(StringConst.deleteProductDialog),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
+              child: const Text(StringConst.cancel),
             ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
                 await _deleteProduct(context, product.id);
               },
-              child: const Text('Delete'),
+              child: const Text(StringConst.delete),
             ),
           ],
         );
