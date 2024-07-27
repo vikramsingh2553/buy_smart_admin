@@ -44,5 +44,20 @@ class ProductProvider with ChangeNotifier {
       throw Exception('Failed to add product');
     }
   }
+  Future<void> deleteProduct(String productId) async {
+    final response = await http.delete(
+      Uri.parse('${ApiEndpoints.product}/$productId'),
+      headers: {
+        'Authorization': 'Bearer ${ApiEndpoints.authToken}',
+        'Content-Type': 'application/json',
+      },
+    );
 
+    if (response.statusCode == 200) {
+      _products.removeWhere((product) => product.id == productId);
+      notifyListeners();
+    } else {
+      throw Exception('Failed to delete product');
+    }
+  }
 }

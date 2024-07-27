@@ -23,6 +23,18 @@ class _ProductScreenState extends State<ProductScreen> {
     await Provider.of<ProductProvider>(context, listen: false).fetchProducts();
   }
 
+  Future<void> _deleteProduct(BuildContext context, String productId) async {
+    try {
+      await Provider.of<ProductProvider>(context, listen: false).deleteProduct(productId);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Product deleted successfully')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to delete product')),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<ProductProvider>(context).products;
@@ -39,43 +51,71 @@ class _ProductScreenState extends State<ProductScreen> {
         itemCount: products.length,
         itemBuilder: (context, index) {
           final ProductModel product = products[index];
-          return Card(
-            margin: const EdgeInsets.all(8.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+          return GestureDetector(
+            onLongPress: () => _confirmDeleteProduct(context, product),
+            child: Card(
+              margin: const EdgeInsets.all(8.0),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    product.description,
-                    style: const TextStyle(fontSize: 14),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Price: \$${product.price}',
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Category: ${product.category}',
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Text(
+                      product.description,
+                      style: const TextStyle(fontSize: 14),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Price: ${product.price}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Category: ${product.category}',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
         },
       ),
+    );
+  }
+
+  void _confirmDeleteProduct(BuildContext context, ProductModel product) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Delete Product'),
+          content: const Text('Are you sure you want to delete this product?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await _deleteProduct(context, product.id);
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
