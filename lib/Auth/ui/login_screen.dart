@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:buy_smart_admin/Auth/provider/auth_provider.dart';
 import 'package:buy_smart_admin/Auth/ui/register_screen.dart';
-import 'package:buy_smart_admin/Product/ui/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,22 +18,22 @@ class _LoginScreenState extends State<LogInScreen> {
   bool _isPasswordVisible = false;
 
   @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AuthProvider userProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
-
       backgroundColor: Colors.white38,
       body: Stack(
         children: [
           Container(
             width: double.infinity,
             height: double.infinity,
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //     image: AssetImage('assets/egor-litvinov-ncKxCn5SI3A-unsplash.jpg'),
-            //     fit: BoxFit.cover,
-            //   ),
-            // ),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
@@ -59,6 +58,7 @@ class _LoginScreenState extends State<LogInScreen> {
                 ),
                 const SizedBox(height: 40),
                 TextFormField(
+                  controller: _usernameController,
                   decoration: InputDecoration(
                     labelText: 'Username',
                     labelStyle: TextStyle(
@@ -83,10 +83,6 @@ class _LoginScreenState extends State<LogInScreen> {
                       Icons.person,
                       color: Colors.grey,
                     ),
-                    suffixIcon: Icon(
-                      Icons.visibility,
-                      color: Colors.grey,
-                    ),
                   ),
                   style: TextStyle(
                     fontSize: 18,
@@ -95,6 +91,8 @@ class _LoginScreenState extends State<LogInScreen> {
                 ),
                 const SizedBox(height: 14),
                 TextFormField(
+                  controller: _passwordController,
+                  obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: TextStyle(
@@ -116,12 +114,19 @@ class _LoginScreenState extends State<LogInScreen> {
                       ),
                     ),
                     prefixIcon: Icon(
-                      Icons.person,
+                      Icons.lock,
                       color: Colors.grey,
                     ),
-                    suffixIcon: Icon(
-                      Icons.visibility,
-                      color: Colors.grey,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
                     ),
                   ),
                   style: TextStyle(
@@ -194,7 +199,11 @@ class _LoginScreenState extends State<LogInScreen> {
                       },
                       child: const Text(
                         'Sign Up',
-                        style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

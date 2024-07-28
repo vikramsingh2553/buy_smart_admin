@@ -1,3 +1,4 @@
+import 'package:buy_smart_admin/Product/ui/product_detail_screen.dart';
 import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class _ProductScreenState extends State<ProductScreen> {
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<ProductProvider>(context).products;
@@ -53,6 +55,14 @@ class _ProductScreenState extends State<ProductScreen> {
         itemBuilder: (context, index) {
           final ProductModel product = products[index];
           return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductDetailScreen(product: product),
+                ),
+              );
+            },
             onLongPress: () => _confirmDeleteProduct(context, product),
             child: Card(
               margin: const EdgeInsets.all(8.0),
@@ -83,7 +93,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     const SizedBox(height: 4),
                     Text(
                       'Category: ${product.category}',
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ],
                 ),
