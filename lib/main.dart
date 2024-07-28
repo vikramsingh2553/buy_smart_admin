@@ -1,5 +1,5 @@
-
-
+import 'package:buy_smart_admin/Auth/ui/login_screen.dart';
+import 'package:buy_smart_admin/Auth/provider/auth_provider.dart';
 import 'package:buy_smart_admin/Category/provider/category_provider.dart';
 import 'package:buy_smart_admin/Product/provider/product_provider.dart';
 import 'package:buy_smart_admin/Product/ui/starting_home_screen.dart';
@@ -13,21 +13,25 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProductProvider(),),
-        ChangeNotifierProvider(create: (context) => CategoryProvider(),)
+        ChangeNotifierProvider(create: (context) => CategoryProvider(),),
+        ChangeNotifierProvider(create: (context) => AuthProvider(),)
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home:  StartingHomeScreen(),
+      child: Consumer<AuthProvider>(
+        builder: (context, authProvider, child) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: authProvider.isLoggedIn ? StartingHomeScreen() : LogInScreen(),
+          );
+        },
       ),
     );
   }

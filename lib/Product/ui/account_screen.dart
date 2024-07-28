@@ -19,18 +19,10 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                StringConst.accountHeader,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 30),
               const ListTile(
                 leading: CircleAvatar(
                   radius: 30,
