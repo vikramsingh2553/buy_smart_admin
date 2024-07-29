@@ -57,14 +57,15 @@ class ProductService {
     }
   }
 
-  Future<ProductModel> updateProduct(String productId, ProductModel updatedProduct) async {
+  Future<ProductModel> updateProduct( id, ProductModel product) async {
     final response = await http.put(
-      Uri.parse('${ApiEndpoints.product}/$productId'),
+      Uri.parse('${ApiEndpoints.product}/$id'),
       headers: {
         'Authorization': 'Bearer ${ApiEndpoints.authToken}',
-        'Content-Type': 'application/json',
+
+
       },
-      body: json.encode(updatedProduct.toJson()),
+      body: jsonEncode(product.toJson()),
     );
 
     if (response.statusCode == 200) {

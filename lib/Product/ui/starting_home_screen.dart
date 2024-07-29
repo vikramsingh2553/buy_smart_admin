@@ -1,3 +1,4 @@
+import 'package:buy_smart_admin/Auth/user/ui/user_profile_screen.dart';
 import 'package:buy_smart_admin/Category/ui/category_screen.dart';
 import 'package:buy_smart_admin/Product/ui/account_screen.dart';
 import 'package:buy_smart_admin/Product/ui/product_screen.dart';
@@ -16,6 +17,7 @@ class _StartingHomeScreenState extends State<StartingHomeScreen> {
     const ProductScreen(),
     const CategoryScreen(),
     const AccountScreen(),
+    UserListScreen(),
   ];
   int currentTab = 0;
 
@@ -46,6 +48,10 @@ class _StartingHomeScreenState extends State<StartingHomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
+            label: StringConst.accountLabel,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.supervised_user_circle),
             label: StringConst.accountLabel,
           ),
         ],

@@ -1,4 +1,4 @@
-import 'package:buy_smart_admin/Product/ui/update_product_screen.dart';
+import 'package:buy_smart_admin/Product/ui/product_detail_screen.dart';
 import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
