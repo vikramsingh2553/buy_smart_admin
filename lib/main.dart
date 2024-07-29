@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: authProvider.isLoggedIn ? StartingHomeScreen() : LogInScreen(),
+            home: StartingHomeScreen(),
+            // home: authProvider.isLoggedIn ? StartingHomeScreen() : LogInScreen(),
           );
         },
       ),
