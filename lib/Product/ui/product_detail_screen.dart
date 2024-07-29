@@ -40,12 +40,11 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
     );
 
     try {
-      final updateProduct=
-      await _productService.updateProduct(widget.product.id, updatedProduct);
+      final updatedProductFromServer = await _productService.updateProduct(widget.product.id, updatedProduct);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Product updated successfully!')),
+        SnackBar(content: Text('Product updated successfully!')),
       );
-      Navigator.pop(context, updateProduct);
+      Navigator.pop(context, updatedProductFromServer);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to update product: $e')),
@@ -57,7 +56,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Product'),
+        title: Text('Update Product'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -68,7 +67,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a name';
@@ -79,7 +78,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(labelText: 'Description'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -90,7 +89,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _priceController,
-                decoration: const InputDecoration(labelText: 'Price'),
+                decoration: InputDecoration(labelText: 'Price'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -105,7 +104,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _categoryController,
-                decoration: const InputDecoration(labelText: 'Category'),
+                decoration: InputDecoration(labelText: 'Category'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a category';
@@ -116,7 +115,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _updateProduct,
-                child: const Text('Update Product'),
+                child: Text('Update Product'),
               ),
             ],
           ),
@@ -125,20 +124,3 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
     );
   }
 }
-// Future<ProductModel> updateProduct(String productId, ProductModel product) async {
-//   final response = await http.delete(
-//     Uri.parse('${ApiEndpoints.product}/$productId'),
-//     headers: {
-//       'Authorization': 'Bearer ${ApiEndpoints.authToken}',
-//       'Content-Type': 'application/json',
-//     },
-//     body: json.encode(product.toJson()),
-//   );
-//
-//   if (response.statusCode == 200) {
-//     return ProductModel.fromJson(json.decode(response.body));
-//   } else {
-//     print('Failed to update product: ${response.statusCode}, ${response.body}');
-//     throw Exception('Failed to update product');
-//   }
-// }}
