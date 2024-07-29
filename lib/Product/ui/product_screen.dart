@@ -25,7 +25,7 @@ class _ProductScreenState extends State<ProductScreen> {
     await Provider.of<ProductProvider>(context, listen: false).fetchProducts();
   }
 
-  Future<void> _deleteProduct(BuildContext context, String productId) async {
+  Future<void> deleteProduct(BuildContext context, String productId) async {
     try {
       await Provider.of<ProductProvider>(context, listen: false).deleteProduct(productId);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -120,7 +120,7 @@ class _ProductScreenState extends State<ProductScreen> {
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
-                await _deleteProduct(context, product.id);
+                await deleteProduct(context, product.id);
               },
               child: const Text(StringConst.delete),
             ),
