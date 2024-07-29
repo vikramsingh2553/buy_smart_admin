@@ -56,4 +56,21 @@ class ProductService {
       throw Exception('Failed to delete product');
     }
   }
+
+  Future<ProductModel> updateProduct(String productId, ProductModel updatedProduct) async {
+    final response = await http.put(
+      Uri.parse('${ApiEndpoints.product}/$productId'),
+      headers: {
+        'Authorization': 'Bearer ${ApiEndpoints.authToken}',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(updatedProduct.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+      return ProductModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to update product');
+    }
+  }
 }

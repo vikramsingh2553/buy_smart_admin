@@ -1,4 +1,4 @@
-import 'package:buy_smart_admin/Product/ui/product_detail_screen.dart';
+import 'package:buy_smart_admin/Product/ui/update_product_screen.dart';
 import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ class _ProductScreenState extends State<ProductScreen> {
     await Provider.of<ProductProvider>(context, listen: false).fetchProducts();
   }
 
-  Future<void> _deleteProduct(BuildContext context, String productId) async {
+  Future<void> deleteProduct(BuildContext context, String productId) async {
     try {
       await Provider.of<ProductProvider>(context, listen: false).deleteProduct(productId);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -59,7 +59,7 @@ class _ProductScreenState extends State<ProductScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductDetailScreen(product: product),
+                  builder: (context) => UpdateProductScreen(product: product,),
                 ),
               );
             },
@@ -104,7 +104,6 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
-
   void _confirmDeleteProduct(BuildContext context, ProductModel product) {
     showDialog(
       context: context,
@@ -120,7 +119,7 @@ class _ProductScreenState extends State<ProductScreen> {
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
-                await _deleteProduct(context, product.id);
+                await deleteProduct(context, product.id);
               },
               child: const Text(StringConst.delete),
             ),
@@ -130,3 +129,4 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 }
+
