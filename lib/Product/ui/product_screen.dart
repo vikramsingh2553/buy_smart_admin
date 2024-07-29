@@ -1,4 +1,4 @@
-import 'package:buy_smart_admin/Product/ui/product_detail_screen.dart';
+import 'package:buy_smart_admin/Product/ui/update_product_screen.dart';
 import 'package:buy_smart_admin/shared/string_const.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,7 @@ class _ProductScreenState extends State<ProductScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductDetailScreen(product: product),
+                  builder: (context) => UpdateProductScreen(product: product,),
                 ),
               );
             },
@@ -104,7 +104,6 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
-
   void _confirmDeleteProduct(BuildContext context, ProductModel product) {
     showDialog(
       context: context,
@@ -130,3 +129,4 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 }
+
