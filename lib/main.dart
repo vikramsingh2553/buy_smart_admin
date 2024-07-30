@@ -1,21 +1,19 @@
 import 'package:buy_smart_admin/Product/ui/starting_home_screen.dart';
 import 'package:buy_smart_admin/shared/api_end_points.dart';
+import 'package:buy_smart_admin/user/provider/user_provider.dart';
+import 'package:buy_smart_admin/user/service/user_service.dart';
+import 'package:buy_smart_admin/user/ui/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:buy_smart_admin/Auth/user/provider/user_provider.dart';
 import 'package:buy_smart_admin/Product/provider/product_provider.dart';
 import 'package:buy_smart_admin/Category/provider/category_provider.dart';
 import 'package:buy_smart_admin/Auth/ui/login_screen.dart';
-
-import 'Auth/provider/auth_provider.dart';
-import 'Auth/user/service/user_service.dart';
-import 'Auth/user/ui/user_profile_screen.dart';
+import 'package:buy_smart_admin/Auth/provider/auth_provider.dart';
 
 void main() {
   final apiService = ApiService(
     baseUrl: 'http://localhost:3000/api',
-    authToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoiVmlrcmFtIn0sImlhdCI6MTcyMjIzNzkyMCwiZXhwIjoxNzIyMjQxNTIwfQ.eP4B6G4L3G_nPsi7eDDEQuUwgPHF0YwpCnBn9hEugXI',
-
+    authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoiVmlrcmFtIn0sImlhdCI6MTcyMjIzNzkyMCwiZXhwIjoxNzIyMjQxNTIwfQ.eP4B6G4L3G_nPsi7eDDEQuUwgPHF0YwpCnBn9hEugXI',
   );
 
   runApp(
@@ -24,9 +22,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => CategoryProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
-        ChangeNotifierProvider(
-          create: (context) => UserProvider(apiService),
-        ),
+        ChangeNotifierProvider(create: (context) => UserProvider(apiService: apiService)),
       ],
       child: MyApp(),
     ),
