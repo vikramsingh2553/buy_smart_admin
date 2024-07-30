@@ -1,8 +1,8 @@
-import 'package:buy_smart_admin/Auth/user/ui/user_profile_screen.dart';
 import 'package:buy_smart_admin/Category/ui/category_screen.dart';
 import 'package:buy_smart_admin/Product/ui/account_screen.dart';
 import 'package:buy_smart_admin/Product/ui/product_screen.dart';
 import 'package:buy_smart_admin/shared/string_const.dart';
+import 'package:buy_smart_admin/user/ui/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class StartingHomeScreen extends StatefulWidget {
@@ -17,7 +17,7 @@ class _StartingHomeScreenState extends State<StartingHomeScreen> {
     const ProductScreen(),
     const CategoryScreen(),
     const AccountScreen(),
-    UserListScreen(),
+    UserProfileScreen(),
   ];
   int currentTab = 0;
 

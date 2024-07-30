@@ -10,7 +10,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> getUserProfile() async {
     final response = await http.get(
-      Uri.parse('http://localhost:3000/api/profile'),
+      Uri.parse('$baseUrl/api/profile'),
       headers: {
         'Authorization': 'Bearer $authToken',
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ class ApiService {
 
   Future<List<Map<String, dynamic>>> getAllUsers() async {
     final response = await http.get(
-      Uri.parse('http://localhost:3000/api/profile'),
+      Uri.parse('$baseUrl/api/users'), // Changed endpoint to reflect all users
       headers: {
         'Authorization': 'Bearer $authToken',
         'Content-Type': 'application/json',
