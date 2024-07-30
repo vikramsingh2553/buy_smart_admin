@@ -31,10 +31,8 @@ class UserProfileScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Name: ${userProfile['name'] ?? 'N/A'}', style: TextStyle(fontSize: 18)),
+                Text('Name: ${userProfile['name'] ?? ''}', style: TextStyle(fontSize: 18)),
                 SizedBox(height: 8),
-                Text('Email: ${userProfile['email'] ?? 'N/A'}', style: TextStyle(fontSize: 18)),
-                // Add more fields as necessary
               ],
             ),
           );

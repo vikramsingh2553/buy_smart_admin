@@ -1,8 +1,6 @@
 import 'package:buy_smart_admin/Product/ui/starting_home_screen.dart';
-import 'package:buy_smart_admin/shared/api_end_points.dart';
 import 'package:buy_smart_admin/user/provider/user_provider.dart';
 import 'package:buy_smart_admin/user/service/user_service.dart';
-import 'package:buy_smart_admin/user/ui/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:buy_smart_admin/Product/provider/product_provider.dart';
@@ -13,7 +11,7 @@ import 'package:buy_smart_admin/Auth/provider/auth_provider.dart';
 void main() {
   final apiService = ApiService(
     baseUrl: 'http://localhost:3000/api',
-    authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoiVmlrcmFtIn0sImlhdCI6MTcyMjIzNzkyMCwiZXhwIjoxNzIyMjQxNTIwfQ.eP4B6G4L3G_nPsi7eDDEQuUwgPHF0YwpCnBn9hEugXI',
+    authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoiVmlrcmFtIn0sImlhdCI6MTcyMjMyNjM5MiwiZXhwIjoxNzIyMzI5OTkyfQ.Pzx4TWNl--s1pZ9GJKl6dixghJ0G3uvT4KzdEszF5us'
   );
 
   runApp(
