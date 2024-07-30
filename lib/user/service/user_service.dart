@@ -26,7 +26,7 @@ class ApiService {
 
   Future<List<Map<String, dynamic>>> getAllUsers() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/api/users'), // Changed endpoint to reflect all users
+      Uri.parse('$baseUrl/api/users'),
       headers: {
         'Authorization': 'Bearer $authToken',
         'Content-Type': 'application/json',
