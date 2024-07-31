@@ -38,7 +38,7 @@ class AuthProvider with ChangeNotifier {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => ProductScreen()),
+        MaterialPageRoute(builder: (context) => StartingHomeScreen()),
       );
     } else {
       _showError(context);

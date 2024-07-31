@@ -1,4 +1,5 @@
 import 'package:buy_smart_admin/Product/ui/starting_home_screen.dart';
+import 'package:buy_smart_admin/shared/api_end_points.dart';
 import 'package:buy_smart_admin/user/provider/user_provider.dart';
 import 'package:buy_smart_admin/user/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProductProvider()),
-        ChangeNotifierProvider(create: (context) => CategoryProvider()),
+        ChangeNotifierProvider(create: (context) => CategoryProvider(ApiEndpoints.authToken)),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider(apiService: apiService)),
       ],

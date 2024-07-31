@@ -10,7 +10,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> getUserProfile() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/api/profile'),
+      Uri.parse('http://localhost:3000/api/profile'),
       headers: {
         'Authorization': 'Bearer $authToken',
         'Content-Type': 'application/json',
@@ -20,13 +20,13 @@ class ApiService {
     if (response.statusCode == 200) {
       return json.decode(response.body) as Map<String, dynamic>;
     } else {
-      throw Exception('Failed to load user profile');
+      throw Exception('Failed to load user profile: ${response.reasonPhrase}');
     }
   }
 
   Future<List<Map<String, dynamic>>> getAllUsers() async {
     final response = await http.get(
-      Uri.parse('$baseUrl/api/users'),
+      Uri.parse('http://localhost:3000/api/users'),
       headers: {
         'Authorization': 'Bearer $authToken',
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ class ApiService {
       final List<dynamic> data = json.decode(response.body);
       return data.map((user) => user as Map<String, dynamic>).toList();
     } else {
-      throw Exception('Failed to load user list');
+      throw Exception('Failed to load user list: ${response.reasonPhrase}');
     }
   }
 }
