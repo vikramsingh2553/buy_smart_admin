@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:buy_smart_admin/Category/model/category_model.dart';
 import 'package:buy_smart_admin/Product/model/product_model.dart';
 import 'package:buy_smart_admin/shared/api_end_points.dart';
 import 'package:http/http.dart' as http;
@@ -74,4 +75,30 @@ class ProductService {
       throw Exception('Failed to update product');
     }
   }
+  Future<CategoryModel> postCategory(CategoryModel category) async {
+    final response = await http.post(
+      Uri.parse(ApiEndpoints.category),
+      headers: {
+        'Authorization': 'Bearer ${ApiEndpoints.authToken}',
+
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(category.toJson()),
+    );
+
+    if (response.statusCode == 201) {
+      try {
+        final Map<String, dynamic> data = json.decode(response.body);
+        return CategoryModel.fromJson(data);
+      } catch (e) {
+        print('Error parsing new category data: $e');
+        throw Exception('Failed to parse new category');
+      }
+    } else {
+      print('Failed to create category. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+      throw Exception('Failed to create category');
+    }
+  }
+
 }
