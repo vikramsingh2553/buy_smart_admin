@@ -27,7 +27,8 @@ class _ProductScreenState extends State<ProductScreen> {
 
   Future<void> deleteProduct(BuildContext context, String productId) async {
     try {
-      await Provider.of<ProductProvider>(context, listen: false).deleteProduct(productId);
+      await Provider.of<ProductProvider>(context, listen: false)
+          .deleteProduct(productId);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text(StringConst.productDeletedSuccess)),
       );
@@ -59,15 +60,18 @@ class _ProductScreenState extends State<ProductScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UpdateProductScreen(product: product,),
+                  builder: (context) => UpdateProductScreen(
+                    product: product,
+                  ),
                 ),
               );
             },
             onLongPress: () => _confirmDeleteProduct(context, product),
             child: Card(
-              margin: const EdgeInsets.all(8.0),
+              shadowColor: Colors.black,
+              margin: const EdgeInsets.all(04),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -104,6 +108,7 @@ class _ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
+
   void _confirmDeleteProduct(BuildContext context, ProductModel product) {
     showDialog(
       context: context,
@@ -129,4 +134,3 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 }
-

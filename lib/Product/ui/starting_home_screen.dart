@@ -17,7 +17,7 @@ class _StartingHomeScreenState extends State<StartingHomeScreen> {
     const ProductScreen(),
     const CategoryScreen(),
     const AccountScreen(),
-    UserProfileScreen(),
+          UserProfileScreen(),
   ];
   int currentTab = 0;
 
@@ -51,8 +51,8 @@ class _StartingHomeScreenState extends State<StartingHomeScreen> {
             label: StringConst.accountLabel,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle),
-            label: StringConst.accountLabel,
+            icon: Icon(Icons.info_outline),
+            label: 'User Info',
           ),
         ],
       ),
