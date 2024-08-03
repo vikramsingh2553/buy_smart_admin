@@ -9,7 +9,10 @@ class CategoryProvider with ChangeNotifier {
   List<CategoryModel> get categories => _categories;
   bool get isLoading => _isLoading;
 
-  final CategoryService _categoryService = CategoryService();
+  final CategoryService _categoryService;
+
+  // Constructor to initialize the CategoryService with the authToken
+  CategoryProvider(String authToken) : _categoryService = CategoryService(authToken);
 
   Future<void> fetchCategories() async {
     _isLoading = true;
@@ -18,10 +21,24 @@ class CategoryProvider with ChangeNotifier {
     try {
       _categories = await _categoryService.fetchCategories();
     } catch (error) {
+      // Handle the error appropriately, e.g., log it or display a message to the user
+      print('Error fetching categories: $error');
       throw error;
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future<void> addCategory(CategoryModel category) async {
+    try {
+      await _categoryService.addCategory(category);
+      _categories.add(category);
+      notifyListeners();
+    } catch (error) {
+      // Handle the error appropriately, e.g., log it or display a message to the user
+      print('Error adding category: $error');
+      throw error;
     }
   }
 }
