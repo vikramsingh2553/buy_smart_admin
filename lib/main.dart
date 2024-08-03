@@ -10,10 +10,8 @@ import 'package:buy_smart_admin/Auth/ui/login_screen.dart';
 import 'package:buy_smart_admin/Auth/provider/auth_provider.dart';
 
 void main() {
-  final apiService = ApiService(
-    baseUrl: 'http://localhost:3000/api',
-    authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoiVmlrcmFtIn0sImlhdCI6MTcyMjMyNjM5MiwiZXhwIjoxNzIyMzI5OTkyfQ.Pzx4TWNl--s1pZ9GJKl6dixghJ0G3uvT4KzdEszF5us'
-  );
+
+  final ApiService apiService = ApiService();
 
   runApp(
     MultiProvider(
@@ -21,7 +19,7 @@ void main() {
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => CategoryProvider(ApiEndpoints.authToken)),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
-        ChangeNotifierProvider(create: (context) => UserProvider(apiService: apiService)),
+        ChangeNotifierProvider(create: (context) => UserProvider(apiService: apiService),),
       ],
       child: MyApp(),
     ),
